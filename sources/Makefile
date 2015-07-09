@@ -5,7 +5,7 @@
 ## Login   <kruszk_t@epitech.net>
 ## 
 ## Started on  Sat Mar 14 10:47:36 2015 kruszk_t
-## Last update Thu Jul  9 10:18:53 2015 Tony Kruszkewycz
+## Last update Mon Jul  6 12:17:46 2015 Tony Kruszkewycz
 ##
 
 PORT		= 4242
@@ -49,7 +49,7 @@ CC		= gcc
 
 RM		= rm -f
 
-CFLAGS		+= -Wall -Wextra -W -I./includes
+CFLAGS		+= -Wall -Wextra -W -I./includes -g3
 
 all:		$(NAME_SRV) $(NAME_CLT)
 

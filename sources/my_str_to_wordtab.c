@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Mon Mar 16 09:14:05 2015 kruszk_t
-** Last update Mon Mar 16 10:14:17 2015 kruszk_t
+** Last update Mon Jul  6 16:22:25 2015 Tony Kruszkewycz
 */
 
 #include	<stdlib.h>
@@ -24,7 +24,7 @@ static int	count_word(char *str)
 	++count;
       ++i;
     }
-  return (count);
+  return (count + 1);
 }
 
 static int	word_len(char *str, int i)
