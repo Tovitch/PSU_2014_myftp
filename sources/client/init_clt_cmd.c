@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Wed Jul  1 17:37:38 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 11:32:29 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 13:41:21 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -82,6 +82,8 @@ int		init_client_put(char *msg, int socketDescriptor)
   char		buf[MAX_MSG + 1];
   int		fd;
   ssize_t	ret;
+  ssize_t	len;
+  struct stat	st;
 
   if ((xwrite(socketDescriptor, msg, strlen(msg))) == -1)
     return (EXIT_FAILURE);
@@ -90,14 +92,16 @@ int		init_client_put(char *msg, int socketDescriptor)
   my_getcwd(buf, tab[1]);
   if ((fd = open(buf, O_RDONLY)) == -1)
     return (my_perror("open"));
-  ret = MAX_MSG;
-  while (ret == MAX_MSG)
+  fstat(fd, &st);
+  len = 0;
+  while (len < st.st_size)
     {
       bzero(buf, sizeof(buf));
       if ((ret = read(fd, buf, MAX_MSG)) != -1)
 	{
 	  if ((xwrite(socketDescriptor, buf, ret)) == -1)
 	    return (xclose(fd, EXIT_FAILURE));
+	  len += ret;
 	}
     }
   if ((get_confirm(socketDescriptor)) == EXIT_FAILURE)

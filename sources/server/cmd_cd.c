@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Thu Jun 25 15:56:46 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 16:39:13 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 11:45:25 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -37,11 +37,11 @@ int		path_down(t_com c, t_server *s)
 int		path_up(t_com c, t_server *s)
 {
   char		*newp;
+  size_t	size;
 
-  if (!(newp = malloc(sizeof(char) * strlen(getcwd(NULL, 0))
-		      + strlen(c.cmd[1]))))
-    return (EXIT_FAILURE);
-  newp = getcwd(NULL, 0);
+  newp = NULL;
+  size = strlen(getcwd(NULL, 0)) + strlen(c.cmd[1]) + 1;
+  newp = getcwd(newp, size);
   strcat(newp, "/");
   strcat(newp, c.cmd[1]);
   if ((access(newp, F_OK)) == -1)

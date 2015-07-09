@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Wed Jul  1 10:51:54 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 16:35:02 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 11:49:56 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -51,7 +51,7 @@ void		check_path(char *path, char *ret)
 
 void		set_newp(t_server *s, char *newp)
 {
-  if (!(s->path = realloc(s->path, strlen(newp)) + 4))
+  if (!(s->path = realloc(s->path, strlen(newp) + 4)))
     return ;
   strcat(s->path, newp);
 }

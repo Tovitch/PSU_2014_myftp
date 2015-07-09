@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Mon Jul  6 09:33:06 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 11:33:19 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 13:40:41 2015 Tony Kruszkewycz
 */
 
 #include	<stdlib.h>
@@ -44,21 +44,25 @@ static int	confirm_recept(t_server *s)
 int		cmd_get(t_com c, t_server *s)
 {
   int		in_file;
-  int		ret;
+  ssize_t	ret;
+  ssize_t	len;
   char		buf[MAX_MSG + 1];
+  struct stat	st;
 
   bzero(buf, sizeof(buf));
   my_getcwd(buf, c.cmd[1]);
   if ((in_file = open(buf, O_RDONLY)) == -1)
     return (my_perror("open"));
-  ret = MAX_MSG;
-  while (ret == MAX_MSG)
+  fstat(in_file, &st);
+  len = 0;
+  while (len < st.st_size)
     {
       bzero(buf, sizeof(buf));
       if ((ret = read(in_file, buf, MAX_MSG)) != -1)
 	{
 	  if ((xwrite(s->connectSocket, buf, ret)) == -1)
 	    return (xclose(in_file, EXIT_FAILURE));
+	  len += ret;
 	}
     }
   if ((get_confim(s)) == EXIT_FAILURE)

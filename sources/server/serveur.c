@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Sat Mar 14 10:48:10 2015 kruszk_t
-** Last update Mon Jul  6 12:32:39 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 11:33:33 2015 Tony Kruszkewycz
 */
 
 #include	<stdlib.h>
@@ -58,7 +58,8 @@ int		main(int ac, char **av)
       return (EXIT_FAILURE);
     }
   server.root = getcwd(NULL, 0);
-  server.path = my_strdup("/");
+  if (!(server.path = my_strdup("/")))
+    return (EXIT_FAILURE);
   server.listenPort = av[1];
   if (init_serv(&server) == EXIT_FAILURE)
     {

@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Wed Jul  1 13:46:44 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 10:45:06 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 13:15:47 2015 Tony Kruszkewycz
 */
 
 #include	<stdio.h>
@@ -51,7 +51,7 @@ static int	check_cmd_entry(t_com c, t_server *s, int i)
 
 static int	exec_son(t_server *s, t_com c)
 {
-  int			i;
+  int		i;
 
   bzero(c.msg, sizeof(c.msg));
   while ((read(s->connectSocket, c.msg, MAX_MSG)) > 0)
