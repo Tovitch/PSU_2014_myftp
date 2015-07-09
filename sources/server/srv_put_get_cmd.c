@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Mon Jul  6 09:33:06 2015 Tony Kruszkewycz
-** Last update Thu Jul  9 13:40:41 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 16:53:36 2015 Tony Kruszkewycz
 */
 
 #include	<stdlib.h>
@@ -54,7 +54,9 @@ int		cmd_get(t_com c, t_server *s)
   if ((in_file = open(buf, O_RDONLY)) == -1)
     return (my_perror("open"));
   fstat(in_file, &st);
+  dprintf(s->connectSocket, "%d", (int)st.st_size);
   len = 0;
+  sleep(1);
   while (len < st.st_size)
     {
       bzero(buf, sizeof(buf));
@@ -75,19 +77,26 @@ int		cmd_put(t_com c, t_server *s)
   char		buf[MAX_MSG];
   int		fd;
   ssize_t	ret;
+  int		len;
+  int		size;
 
   bzero(buf, sizeof(buf));
   my_getcwd(buf, c.cmd[1]);
   if ((fd = open(buf, O_CREAT | O_WRONLY, 0644)) == -1)
     return (my_perror("open"));
-  ret = MAX_MSG;
-  while (ret == MAX_MSG)
+  bzero(buf, sizeof(buf));
+  if ((read(s->connectSocket, buf, MAX_MSG)) > 0)
+    size = atoi(buf);
+  printf("%s puts %s (%do)\n", s->clt_info->nickname, c.cmd[1], size);
+  len = 0;
+  while (len < size)
     {
       bzero(buf, sizeof(buf));
-      if ((ret = read(s->connectSocket, buf, MAX_MSG)) != -1)
+      if ((ret = read(s->connectSocket, buf, MAX_MSG)) > 0)
 	{
 	  if ((xwrite(fd, buf, ret)) == -1)
 	    return (xclose(fd, EXIT_FAILURE));
+	  len += ret;
 	}
     }
   if ((confirm_recept(s)) == EXIT_FAILURE)

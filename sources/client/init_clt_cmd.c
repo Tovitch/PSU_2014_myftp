@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Wed Jul  1 17:37:38 2015 Tony Kruszkewycz
-** Last update Thu Jul  9 13:41:21 2015 Tony Kruszkewycz
+** Last update Thu Jul  9 16:53:29 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -41,6 +41,8 @@ int		init_client_get(char *msg, int socketDescriptor)
 {
   t_com		c;
   int		fd;
+  int		size;
+  int		len;
 
   strcat_cwd(&c, msg);
   if ((xwrite(socketDescriptor, c.msg, c.msgLength)) == -1)
@@ -51,18 +53,22 @@ int		init_client_get(char *msg, int socketDescriptor)
   my_getcwd(c.msg, c.cmd[1]);
   if ((fd = open(c.msg, O_WRONLY | O_CREAT, 0644)) == -1)
     return (my_perror("open"));
-  c.msgLength = MAX_MSG;
-  while (c.msgLength == MAX_MSG)
+  bzero(c.msg, sizeof(c.msg));
+  if ((read(socketDescriptor, c.msg, sizeof(c.msg))) > 0)
+    size = atoi(c.msg);
+  len = 0;
+  while (len < size)
     {
       bzero(c.msg, sizeof(c.msg));
-      if ((c.msgLength = read(socketDescriptor, &c.msg, MAX_MSG)) != -1)
+      if ((c.msgLength = read(socketDescriptor, &c.msg, MAX_MSG)) > 0)
 	{
 	  if ((xwrite(fd, c.msg, c.msgLength)) == -1)
 	    return (xclose(fd, EXIT_FAILURE));
+	  len += c.msgLength;
 	}
     }
   confirm_recept(socketDescriptor);
-  return (EXIT_SUCCESS);
+  return (xclose(fd, EXIT_SUCCESS));
 }
 
 int		get_confirm(int socketDescriptor)
@@ -93,8 +99,11 @@ int		init_client_put(char *msg, int socketDescriptor)
   if ((fd = open(buf, O_RDONLY)) == -1)
     return (my_perror("open"));
   fstat(fd, &st);
+  dprintf(socketDescriptor, "%d", (int)st.st_size);
   len = 0;
-  while (len < st.st_size)
+  ret = MAX_MSG;
+  sleep(1);
+  while (ret == MAX_MSG)
     {
       bzero(buf, sizeof(buf));
       if ((ret = read(fd, buf, MAX_MSG)) != -1)
