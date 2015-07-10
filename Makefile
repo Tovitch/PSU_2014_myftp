@@ -5,7 +5,7 @@
 ## Login   <kruszk_t@epitech.net>
 ## 
 ## Started on  Sat Mar 14 10:47:36 2015 kruszk_t
-## Last update Thu Jul  9 11:35:15 2015 Tony Kruszkewycz
+## Last update Fri Jul 10 09:44:35 2015 Tony Kruszkewycz
 ##
 
 PORT		= 4242
@@ -19,7 +19,8 @@ SRC_SRV		= sources/server/serveur.c		\
 		  sources/server/cmd_cd.c		\
 		  sources/server/cmd_cd_func.c		\
 		  sources/server/cmd_help.c		\
-		  sources/server/srv_put_get_cmd.c	\
+		  sources/server/cmd_get.c		\
+		  sources/server/cmd_put.c		\
 		  sources/server/cmd_empty.c		\
 		  sources/basic.c			\
 		  sources/my_str_to_wordtab.c		\
