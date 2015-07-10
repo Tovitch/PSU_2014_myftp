@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Mon Jul  6 09:33:06 2015 Tony Kruszkewycz
-** Last update Fri Jul 10 10:53:33 2015 Tony Kruszkewycz
+** Last update Fri Jul 10 14:37:24 2015 Tony Kruszkewycz
 */
 
 #include	<stdlib.h>
@@ -60,10 +60,15 @@ int		cmd_get(t_com c, t_server *s)
   char		buf[MAX_MSG + 1];
   struct stat	st;
 
+  if (!(c.cmd[1]))
+    {
+      dprintf(s->connectSocket, "Usage: put _FILE_\n");
+      return (EXIT_SUCCESS);
+    }
   bzero(buf, sizeof(buf));
   my_getcwd(buf, c.cmd[1]);
   if ((in_file = open(buf, O_RDONLY)) == -1)
-    return (my_perror("open"));
+    return (my_send_err(c.cmd[1], s->connectSocket, EXIT_SUCCESS));
   fstat(in_file, &st);
   dprintf(s->connectSocket, "%d", (int)st.st_size);
   printf("\t--> %s gets %s (%d o)\n", s->clt_info->nickname, c.cmd[1],

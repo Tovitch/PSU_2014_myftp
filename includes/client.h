@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Fri Jun 26 11:11:10 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 11:08:53 2015 Tony Kruszkewycz
+** Last update Fri Jul 10 15:36:20 2015 Tony Kruszkewycz
 */
 
 #ifndef CLIENT_H_
@@ -62,6 +62,8 @@ int			clt_cmd_cd(char *msg, int socketDescriptor);
 int			clt_cmd_cd(char *msg, int socketDescriptor);
 void			write_error(t_com c, int ret);
 void			check_path(char *path, char *ret);
+int			init_c(t_com *c, char *msg);
+int			go_home();
 
 /*
 ** clt_auth.c
@@ -82,5 +84,6 @@ int			xclose(int fd, int ret_val);
 
 void			my_getcwd(char *buf, char *file_name);
 int			my_perror(const char *s);
+int			my_send_err(const char *s, int fd, int ret);
 
 #endif /* !CLIENT_H_ */

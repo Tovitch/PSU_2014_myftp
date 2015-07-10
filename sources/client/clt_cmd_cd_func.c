@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Fri Jul  3 17:15:43 2015 Tony Kruszkewycz
-** Last update Fri Jul  3 17:24:06 2015 Tony Kruszkewycz
+** Last update Fri Jul 10 15:35:07 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -55,4 +55,24 @@ void		write_error(t_com c, int ret)
     printf(NO_REP, c.cmd[1]);
   else if (ret == VNO_RGHT)
     printf(NO_RGHT);
+}
+
+int		init_c(t_com *c, char *msg)
+{
+  strcpy(c->msg, msg);
+  c->msgLength = strlen(c->msg);
+  if (!(c->cmd = my_str_to_wordtab(c->msg)))
+    return (EXIT_FAILURE);
+  return (EXIT_SUCCESS);
+}
+
+int		go_home()
+{
+  char		buf[MAX_MSG + 1];
+
+  bzero(buf, sizeof(buf));
+  strcpy(buf, "/home/");
+  strcat(buf, getlogin());
+  chdir(buf);
+  return (EXIT_SUCCESS);
 }

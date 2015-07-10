@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Thu Jun 25 15:01:34 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 13:22:18 2015 Tony Kruszkewycz
+** Last update Fri Jul 10 11:39:18 2015 Tony Kruszkewycz
 */
 
 #ifndef SERVEUR_H_
@@ -136,6 +136,7 @@ int				xclose(int fd, int ret_val);
 ** basic.c
 */
 int				my_perror(const char *s);
+int				my_send_err(const char *s, int fd, int ret);
 void				my_getcwd(char *buf, char *file_name);
 char				*my_strdup(char *str);
 

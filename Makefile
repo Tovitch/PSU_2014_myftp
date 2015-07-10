@@ -5,7 +5,7 @@
 ## Login   <kruszk_t@epitech.net>
 ## 
 ## Started on  Sat Mar 14 10:47:36 2015 kruszk_t
-## Last update Fri Jul 10 09:44:35 2015 Tony Kruszkewycz
+## Last update Fri Jul 10 15:03:45 2015 Tony Kruszkewycz
 ##
 
 PORT		= 4242
@@ -31,6 +31,7 @@ SRC_CLT		= sources/client/client.c		\
 		  sources/client/init_clt_cmd.c		\
 		  sources/client/clt_auth.c		\
 		  sources/client/clt_cmd.c		\
+		  sources/client/cmd_get.c		\
 		  sources/client/clt_cmd_cd.c		\
 		  sources/client/clt_cmd_cd_func.c	\
 		  sources/client/clt_get_connection.c	\

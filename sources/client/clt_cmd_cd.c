@@ -5,7 +5,7 @@
 ** Login   <kruszk_t@epitech.net>
 **
 ** Started on  Fri Jul  3 17:11:45 2015 Tony Kruszkewycz
-** Last update Mon Jul  6 12:10:44 2015 Tony Kruszkewycz
+** Last update Fri Jul 10 15:35:05 2015 Tony Kruszkewycz
 */
 
 #include	<string.h>
@@ -47,26 +47,6 @@ int		path_up(t_com c)
     return (VNO_RGHT);
   chdir(newp);
   free(newp);
-  return (EXIT_SUCCESS);
-}
-
-int		init_c(t_com *c, char *msg)
-{
-  strcpy(c->msg, msg);
-  c->msgLength = strlen(c->msg);
-  if (!(c->cmd = my_str_to_wordtab(c->msg)))
-    return (EXIT_FAILURE);
-  return (EXIT_SUCCESS);
-}
-
-int		go_home()
-{
-  char		buf[MAX_MSG + 1];
-
-  bzero(buf, sizeof(buf));
-  strcpy(buf, "/home/");
-  strcat(buf, getlogin());
-  chdir(buf);
   return (EXIT_SUCCESS);
 }
 
